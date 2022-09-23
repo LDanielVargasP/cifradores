@@ -6,7 +6,7 @@ print('La frase es: '+frase)
 
 
 def cifrarOneTimePad(frase):
-    #print(frase+' desde funcion' )
+    
     abecedario = 'abcdefghijklmnñopqrstuvwxyzáéíóúü'
     llave = ''
 
@@ -17,7 +17,7 @@ def cifrarOneTimePad(frase):
         else:
             k = randint(0,len(abecedario)-1)
             llave += abecedario[k]
-        #print(x)
+        
 
     print(llave)
 
