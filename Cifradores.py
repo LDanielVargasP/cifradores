@@ -19,8 +19,7 @@ def verificarLenguaje(entrada):
 
 def CifradoOneTimePad(frase):  #Crea la llave del tamanio de la frase
     
-    #abecedario = 'abcdefghijklmnñopqrstuvwxyzáéíóúü'
-    abecedario = 'abcdefghijklmnopqrstuvwxyz' #25 len regresa 26
+    abecedario = 'abcdefghijklmnñopqrstuvwxyzáéíóúü'
     llave = ''
     msjCifrado = ''
 
@@ -50,7 +49,7 @@ def CifradoOneTimePad(frase):  #Crea la llave del tamanio de la frase
 
 
 def DesencriptarOneTimePad():
-    abecedario = 'abcdefghijklmnopqrstuvwxyz' #25 len regresa 26
+    abecedario = 'abcdefghijklmnñopqrstuvwxyzáéíóúü'
     msjDescrifrado = ''
     mensaje = input('Ingresa el mensaje a Desencriptar: ')
     if not verificarLenguaje(mensaje):
@@ -65,25 +64,22 @@ def DesencriptarOneTimePad():
         if mensaje[x] == ' ' or mensaje[x] == '.' or mensaje[x] == ',': #Si tiene espacio punto o coma lo pasa directamente
             msjDescrifrado += mensaje[x]
             
-        else: #Revisar else
-            i = abecedario.find(frase[x]) + abecedario.find(llave[x]) #Hace la suma de los indices
-            
-            if i > (len(abecedario) - 1): #si es mayor que el abecedario los resta para poder empezar de 0 
-                i = i - (len(abecedario) - 1) - 1
-                msjCifrado += abecedario[i]
+        else: 
+            i = abecedario.find(mensaje[x]) - abecedario.find(llave[x]) #Hace la resta de los indices
+            if i < 0: 
+                i = len(abecedario) + i #Si es negativo vuelve a dar la vuelta al abecedario para no desbordarse
+                msjDescrifrado += abecedario[i]
             else:
-                msjCifrado += abecedario[i] #Si no pasa la letra correspondiente de la suma
+                msjDescrifrado += abecedario[i] #Si no pasa el la letra de acuerdo al indice
             
-    print('El mensaje cifrado es: '+msjCifrado)
+    print('El mensaje Descifrado es: '+msjDescrifrado)
     
 
     
 
-DesencriptarOneTimePad()
-
-'''if verificarLenguaje(mensaje):
+if verificarLenguaje(mensaje):
     CifradoOneTimePad(mensaje)
 else:
-    print('Mensaje no valido')'''
+    print('Mensaje no valido')
 
-
+DesencriptarOneTimePad()
