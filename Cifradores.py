@@ -1,7 +1,20 @@
 from random import randint
 
-frase = input('Ingresa la frase: ')
-print('La frase es: '+frase)
+mensaje = input('Ingresa la frase: ').lower()
+
+def verificarLenguaje(entrada):
+
+    print('La frase es: '+entrada)
+    lgValido = 'abcdefghijklmnñopqrstuvwxyzáéíóúü., '
+
+    for x in entrada: #Se verifica que sea la frase parte del lenguaje valido
+        if lgValido.find(x) == -1:
+            return False
+
+    return True
+
+
+
 
 
 def CifradoOneTimePad(frase):  #Crea la llave del tamanio de la frase
@@ -33,9 +46,44 @@ def CifradoOneTimePad(frase):  #Crea la llave del tamanio de la frase
             
     print('El mensaje cifrado es: '+msjCifrado)
 
-def DesencriptarOneTimePad(mensaje):
-    pass
 
-CifradoOneTimePad(frase)
+
+
+def DesencriptarOneTimePad():
+    abecedario = 'abcdefghijklmnopqrstuvwxyz' #25 len regresa 26
+    msjDescrifrado = ''
+    mensaje = input('Ingresa el mensaje a Desencriptar: ')
+    if not verificarLenguaje(mensaje):
+        print('Mensaje no valido')
+        return
+    llave = input('Ingrese la llave: ')
+    if len(llave) < len(mensaje):
+        print('Llave no valida')
+        return
+
+    for x in range(len(mensaje)):
+        if mensaje[x] == ' ' or mensaje[x] == '.' or mensaje[x] == ',': #Si tiene espacio punto o coma lo pasa directamente
+            msjDescrifrado += mensaje[x]
+            
+        else: #Revisar else
+            i = abecedario.find(frase[x]) + abecedario.find(llave[x]) #Hace la suma de los indices
+            
+            if i > (len(abecedario) - 1): #si es mayor que el abecedario los resta para poder empezar de 0 
+                i = i - (len(abecedario) - 1) - 1
+                msjCifrado += abecedario[i]
+            else:
+                msjCifrado += abecedario[i] #Si no pasa la letra correspondiente de la suma
+            
+    print('El mensaje cifrado es: '+msjCifrado)
+    
+
+    
+
+DesencriptarOneTimePad()
+
+'''if verificarLenguaje(mensaje):
+    CifradoOneTimePad(mensaje)
+else:
+    print('Mensaje no valido')'''
 
 
