@@ -1,16 +1,31 @@
+from ast import match_case
 import numpy as np
 
 alfabeto = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "Ñ", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
-validacion = True
-validacion2 = True
+validacion = False
+validacion2 = False
 
-if validacion:
-    mensaje = input("\nIngrese el mensaje (debe tener 6 letras y en MAYUSCULAS): ")
+opcion = input("Que desea hacer:\nEncryptar = 1\nDesencriptar = 2\n ")
 
-    if validacion and len(mensaje) != 6:
-        print("El mensaje debe de tener 6 caracteres")
-        validacion = False
+match opcion:
+    case "1":
+        validacion = True
+        if validacion:
+            mensaje = input("\nIngrese el mensaje (debe tener 6 letras y en MAYUSCULAS): ")
+        if validacion and len(mensaje) != 6:
+            print("El mensaje debe de tener 6 caracteres")
+            validacion = False
+
+
+    case "2":
+        validacion2 = True
+        if validacion2:
+            mensajeEncryptado = input("\nIngrese el mensaje a decifrar(debe tener 6 letras y en MAYUSCULAS): ")
+
+        if validacion and len(mensajeEncryptado) != 6:
+            print("El mensaje debe de tener 6 caracteres")
+            validacion = False
 
 def MetodoHillEncryptar(alfabeto, mensaje):
     #Declaracion de las matrices
@@ -134,14 +149,14 @@ def MetodoHillDesencryptar(alfabeto, mensaje2):
     letraMensaje = 0
     for i in range(0, 3):
         for j in range(0, len(alfabeto)):
-            if mensaje[letraMensaje] == alfabeto[j]:
+            if mensajeEncryptado[letraMensaje] == alfabeto[j]:
                 M1[i][0] = j
                 break
         letraMensaje += 1
 
     for i in range(0, 3):
         for j in range(0, len(alfabeto)):
-            if mensaje[letraMensaje] == alfabeto[j]:
+            if mensajeEncryptado[letraMensaje] == alfabeto[j]:
                 M2[i][0] = j
                 break
         letraMensaje += 1
@@ -195,4 +210,7 @@ def MetodoHillDesencryptar(alfabeto, mensaje2):
 
 if validacion:
     print("\nResultado del criptograma: " + MetodoHillEncryptar(alfabeto, mensaje))
+    validacion = False
+if validacion2:
+    print("\nResultado de desencriptacion: " + MetodoHillDesencryptar(alfabeto, mensajeEncryptado))
     validacion = False
