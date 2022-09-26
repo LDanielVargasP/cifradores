@@ -11,7 +11,7 @@ if validacion:
         print("El mensaje debe de tener 6 caracteres")
         validacion = False
 
-def MetodoHill(alfabeto, mensaje):
+def MetodoHillEncryptar(alfabeto, mensaje):
     #Declaracion de las matrices
     K = [
         [1, 0, 1],
@@ -101,7 +101,11 @@ def MetodoHill(alfabeto, mensaje):
 
     return criptograma
 
+def MetodoHillDesencryptar(alfabeto, mensaje):
+    print("decru")
+    
+
 
 if validacion:
-    print("\nResultado del criptograma: " + MetodoHill(alfabeto, mensaje))
+    print("\nResultado del criptograma: " + MetodoHillEncryptar(alfabeto, mensaje))
     validacion = False
